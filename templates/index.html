@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% include 'inc/landing.html' %}
+{% endblock %}
+
+{% block header %}
+<h1>Celebration of Life</h1>
+<p>Sir (Prince) Christopher Abiodun Latunde</p>
+{% endblock %}
+
+{% block content %}
+<!-- Signup Form -->
+<a href="/pages/gallery.html" class="button">Photo Gallery</a>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        (function () {
+              // Join Form.
+            (function() {
+              // Vars.
+                var $form = document.querySelectorAll('#signup-form')[0],
+                    $submit = document.querySelectorAll('#signup-form input[type="submit"]')[0],
+                    $message;
+
+                if (!('addEventListener' in $form)) {
+                    return;
+                }
+
+              // Message.
+                $message = document.createElement('span');
+                $message.classList.add('message');
+                $form.appendChild($message);
+
+                $message._show = function(type, text) {
+                    $message.innerHTML = text;
+                    $message.classList.add(type);
+                    $message.classList.add('visible');
+                    window.setTimeout(function() {
+                        $message._hide();
+                    }, 9000);
+                };
+                $message._hide = function() {
+                    $message.classList.remove('visible');
+                };
+              // Events.
+                $form.addEventListener('submit', function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+                $("#loadn").addClass("visible");
+                $message._hide();
+                $submit.disabled = true;
+                var jqxhr = $.post( "join.php", $( "#signup-form" ).serialize())
+                    .done(function(res) {
+                        if (res.status == 200) {
+                            $message._show('success', 'Thank you! Please check your inbox.');
+                        } else {
+                            $message._show('failure', 'Something went wrong. Please try again...');
+                        }
+                    })
+                    .fail(function() {
+                        $message._show('failure', 'Something went wrong. Please try again.');
+                    })
+                    .always(function() {
+                        $("#loadn").removeClass("visible");
+                        $form.reset();
+                        $submit.disabled = false;
+                    });
+                });
+            })();
+        })();
+    </script>
+{% endblock %}

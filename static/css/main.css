@@ -99,7 +99,7 @@
 
 		body > * {
 			position: relative;
-			z-index: 2;
+			/*z-index: 2;*/
 		}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -1186,14 +1186,14 @@ Stretchy Nav style - common to:
 -------------------------------- */
 .cd-stretchy-nav {
   position: fixed;
-  z-index: 2;
+  z-index: 8;
   top: 40px;
   right: 5%;
 }
 .cd-stretchy-nav .stretchy-nav-bg {
   /* this is the stretching navigation background */
   position: absolute;
-  z-index: 1;
+  z-index: 7;
   top: 0;
   right: 0;
   width: 60px;
@@ -1212,7 +1212,7 @@ Stretchy Nav style - common to:
 
 .cd-nav-trigger {
   position: absolute;
-  z-index: 3;
+  z-index: 10;
   top: 0;
   right: 0;
   height: 60px;
@@ -1294,7 +1294,7 @@ Stretchy Nav style - common to:
 
 .cd-stretchy-nav ul {
   position: relative;
-  z-index: 2;
+  z-index: 8;
   padding: 60px 0 0;
   visibility: hidden;
   -webkit-transition: visibility 0.3s;
@@ -1313,7 +1313,7 @@ Stretchy Nav style - common to:
   -webkit-transition: color 0.2s;
   -moz-transition: color 0.2s;
   transition: color 0.2s;
-  background-color: rgba(64, 64, 64, 0.6);
+  background-color: rgba(64, 64, 64, 0.9);
 }
 .cd-stretchy-nav ul a::after {
   /* navigation item icons */

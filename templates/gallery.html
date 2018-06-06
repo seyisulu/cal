@@ -1,21 +1,63 @@
 {% extends 'base.html' %}
 
 {% block styles %}
-    {% include 'inc/landing.html' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/photoswipe.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/default-skin/default-skin.css') }}">
+    {% include 'inc/landing.html' %}
+    <style type="text/css">
+    .cal-gallery span {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-touch-callout: none;
+        background-size: cover;
+        display: block;
+        float: left;
+        margin: 0 12px 12px 0;
+        width: 171px;
+        height: 171px;
+        line-height: 0;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+    .cal-gallery span.first {
+        height: 342px;
+        width: 342px;
+    }
+
+    @media screen and (max-width: 480px) {
+        body, html {
+            height: auto !important;
+        }
+        .cal-gallery span,
+        .cal-gallery span.first {
+            display: block !important;
+            float: none !important;
+            margin: 0 0 12px 0;
+            height: 50vh !important;
+            width: auto !important;
+        }
+    }
+    </style>
 {% endblock %}
 
 {% block content %}
-    <div id="cal-body">
+  <div id="cal-body">
 
-        <h2>Sir (Prince) Christopher Abiodun Latunde (KSC)</h2>
-        <p>
-            Photo gallery.
-        </p>
-        <br>
-        <!-- Root element of PhotoSwipe. Must have class pswp. -->
-        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <h2>Photo Gallery</h2>
+    <div class="cal-gallery">
+
+        <span style="background-image: url('{{ url_for('static', filename='img/bg/01.jpg') }}')" class="px first"></span>
+        <span style="background-image: url('{{ url_for('static', filename='img/bg/02.jpg') }}')" class="px"></span>
+        <span style="background-image: url('{{ url_for('static', filename='img/bg/12.jpg') }}')" class="px"></span>
+        <span style="background-image: url('{{ url_for('static', filename='img/bg/04.jpg') }}')" class="px"></span>
+        <span style="background-image: url('{{ url_for('static', filename='img/bg/05.jpg') }}')" class="px"></span>
+        <span style="background-image: url('{{ url_for('static', filename='img/bg/14.jpg') }}')" class="px"></span>
+        <span style="line-height: 171px;" class="px button">View Gallery</span>
+
+    </div>
+    <br style="clear:both;">
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="pswp__bg"></div>
             <div class="pswp__scroll-wrap">
                 <!-- Container that holds slides.
@@ -59,113 +101,102 @@
                 </div>
             </div>
         </div>
-    </div>
+  </div>
 {% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/photoswipe.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/photoswipe-ui-default.min.js') }}"></script>
 <script type="text/javascript">
-var pswpElement = document.querySelectorAll('.pswp')[0];
 
-// build items array
-var itemx = [
-    {
-        src: "{{ url_for('static', filename='img/bg/01.jpg') }}",
-        w: 1500,
-        h: 908
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/02.jpg') }}",
-        w: 1500,
-        h: 1121
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/03.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/04.jpg') }}",
-        w: 1500,
-        h: 981
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/05.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/06.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/07.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/08.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/09.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/10.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/11.jpg') }}",
-        w: 1920,
-        h: 1080
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/12.jpg') }}",
-        w: 1920,
-        h: 1174
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/13.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/14.jpg') }}",
-        w: 1920,
-        h: 1280
-    },
-    {
-        src: "{{ url_for('static', filename='img/bg/15.jpg') }}",
-        w: 1920,
-        h: 1280
-    }
-];
-var items = [
-    {
-        src: 'https://placekitten.com/600/400',
-        w: 600,
-        h: 400
-    },
-    {
-        src: 'https://placekitten.com/1200/900',
-        w: 1200,
-        h: 900
-    }
-];
-
-var options = {
-    index: 0 // start at first slide
-};
-
-// Initializes and opens PhotoSwipe
-var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-//gallery.init();
-
+(function($) {
+   $(document).ready(function(){
+        $('.px')
+        $(document).on('click', '.px', function viewGallery(evt) {
+            console.log('clicked:', evt.target);
+            var pswpElement = document.querySelectorAll('.pswp')[0];
+            var items = [
+                {
+                    src: "{{ url_for('static', filename='img/bg/01.jpg') }}",
+                    w: 1500,
+                    h: 908
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/02.jpg') }}",
+                    w: 1500,
+                    h: 1121
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/03.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/04.jpg') }}",
+                    w: 1500,
+                    h: 981
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/05.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/06.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/07.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/08.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/09.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/10.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/11.jpg') }}",
+                    w: 1920,
+                    h: 1080
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/12.jpg') }}",
+                    w: 1920,
+                    h: 1174
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/13.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/14.jpg') }}",
+                    w: 1920,
+                    h: 1506
+                },
+                {
+                    src: "{{ url_for('static', filename='img/bg/15.jpg') }}",
+                    w: 1920,
+                    h: 1280
+                }
+            ];
+            var options = { index: 0 };
+            var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+            gallery.init();
+        });
+   });
+})(jQuery);
 </script>
 {% endblock %}

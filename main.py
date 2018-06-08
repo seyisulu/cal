@@ -12,6 +12,12 @@ def index():
     return render_template('index.html', home=True)
 
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(
+        static, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
 @app.route('/pages/<page>.html')
 def sign(page):
     if page in pages:
@@ -31,9 +37,3 @@ def handle_404(error):
 @app.errorhandler(500)
 def handle_error():
     return render_template('error.html')
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(
-        static, 'favicon.ico', mimetype='image/vnd.microsoft.icon')

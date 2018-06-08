@@ -1,10 +1,28 @@
 import os
 import logging
-from flask import Flask, render_template, request, send_from_directory
+from authomatic import Authomatic
+from authomatic.providers import oauth2, oauth1
+from flask import Flask, render_template, send_from_directory
+
+CONFIG = {
+    'tw': {  # Your internal provider name
+        'class_': oauth1.Twitter,
+        # Twitter is an AuthorizationProvider so we need to set several other properties too:
+        'consumer_key': '########################',
+        'consumer_secret': '########################',
+    },
+    'fb': {
+        'class_': oauth2.Facebook,
+        # Facebook is an AuthorizationProvider too.
+        'consumer_key': '204638593683246',
+        'consumer_secret': '########################',
+    }
+}
 
 app = Flask(__name__)
 static = os.path.join(app.root_path, 'static')
-pages = ('arrangements', 'biography', 'gallery', 'tributes')
+pages = ('arrangements', 'biography', 'gallery', 'privacy', 'tributes')
+authomatic = Authomatic(CONFIG, 'asKDkwdsawew92kDKlwkdw2030ODkdfw')
 
 @app.route('/')
 @app.route('/index.html')

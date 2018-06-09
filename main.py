@@ -153,13 +153,17 @@ def write_tribute(kind):
         return redirect(url_for('tributes'))
 
     return render_template('tribute.html',
-                           kind=kind, userinfo=session[constants.PROFILE_KEY])
+                           kind=kind,
+                           userinfo=session[constants.PROFILE_KEY])
 
 
 @app.route('/tributes.html')
 def tributes():
-    tributes = Tribute.query.all()
-    return render_template('tributes.html', tributes=tributes)
+    tributes = Tribute.query.order_by(Tribute.id.desc()).all()
+    logging.info(tributes)
+    return render_template('tributes.html',
+                           tributes=tributes,
+                           userinfo=session[constants.PROFILE_KEY])
 
 
 @app.route('/favicon.ico')

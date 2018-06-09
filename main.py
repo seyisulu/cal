@@ -160,10 +160,8 @@ def write_tribute(kind):
 @app.route('/tributes.html')
 def tributes():
     tributes = Tribute.query.order_by(Tribute.id.desc()).all()
-    logging.info(tributes)
     return render_template('tributes.html',
-                           tributes=tributes,
-                           userinfo=session[constants.PROFILE_KEY])
+                           tributes=tributes)
 
 
 @app.route('/favicon.ico')

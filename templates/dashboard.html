@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% include 'inc/landing.html' %}
+    <style type="text/css">
+    .cal-gallery span, .cal-gallery a.px.button {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-touch-callout: none;
+        background-size: cover;
+        display: block;
+        float: left;
+        margin: 0 12px 12px 0;
+        width: 171px;
+        height: 171px;
+        line-height: 0;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+    .cal-gallery span.first {
+        height: 342px;
+        width: 342px;
+    }
+    .darken {
+        background: linear-gradient(360deg, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 70%) no-repeat center top, url('{{ userinfo['picture'] }}') 0 0 /cover;
+    }
+    .px {
+        line-height: 171px!important;
+        height: 171px!important;
+        width: 171px!important;
+    }
+
+
+    @media screen and (max-width: 480px) {
+        body, html {
+            height: auto !important;
+        }
+        .cal-gallery span,
+        .cal-gallery span.first {
+            display: block !important;
+            float: none !important;
+            margin: 0 0 12px 0;
+            height: 50vh !important;
+            width: auto !important;
+        }
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+  <div id="cal-body">
+
+    <h2>Welcome, {{ userinfo['name'] }}</h2>
+    <div class="cal-gallery">
+        <!-- TODO: set default image in controller -->
+        <a style="background: linear-gradient(360deg, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 70%)
+                no-repeat center top, url('{{ url_for('static', filename='img/candle.svg') }}') 0 0 /contain no-repeat;"
+              class="px button" href="/tribute/candle">Light a Candle</a>
+        <a style="background: linear-gradient(360deg, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 70%)
+                no-repeat center top, url('{{ url_for('static', filename='img/blossom.svg') }}') 0 0 /contain no-repeat;"
+              class="px button" href="/tribute/flower">Lay a Flower</a>
+        <a style="background: linear-gradient(360deg, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 70%)
+                no-repeat center top, url('{{ url_for('static', filename='img/orange.svg') }}') 0 0 /contain no-repeat;"
+              class="px button darken" href="/tribute/tribute">Leave a Tribute</a>
+
+    </div>
+    <br style="clear:both;">
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+</script>
+{% endblock %}

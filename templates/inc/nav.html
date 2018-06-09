@@ -1,14 +1,27 @@
 <nav class="cd-stretchy-nav">
-  <a class="cd-nav-trigger" href="#0">
-    <span aria-hidden="true"></span>
-  </a>
+    {% if session.get('profile') and session['profile'].get('picture') %}
+        {% set imgx = session['profile']['picture'] %}
+        <a class="cd-nav-trigger" href="#0"
+           style="background: linear-gradient(360deg, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 70%)
+                no-repeat center top, url('{{ imgx }}') 0 0 /contain no-repeat;">
+            <span aria-hidden="true"></span>
+        </a>
+    {% else %}
+        <a class="cd-nav-trigger" href="#0">
+            <span aria-hidden="true"></span>
+        </a>
+    {% endif %}
 
-  <ul>
-    <li><a href="/index.html"><span>Home</span></a></li>
-    <li><a href="/pages/biography.html"><span>Biography</span></a></li>
-    <li><a href="/pages/gallery.html"><span>Gallery</span></a></li>
-    <li><a href="/pages/arrangements.html"><span>Arrangements</span></a></li>
-  </ul>
+    <ul>
+        <li><a href="/index.html"><span>Home</span></a></li>
+        <li><a href="/pages/biography.html"><span>Biography</span></a></li>
+        <li><a href="/pages/gallery.html"><span>Gallery</span></a></li>
+        <li><a href="/pages/arrangements.html"><span>Arrangements</span></a></li>
+        <li><a href="/pages/tributes.html"><span>Tributes</span></a></li>
+        {% if session.get('profile') %}
+            <li><a href="/logout.html"><span>Logout</span></a></li>
+        {% endif %}
+    </ul>
 
-  <span aria-hidden="true" class="stretchy-nav-bg"></span>
+    <span aria-hidden="true" class="stretchy-nav-bg"></span>
 </nav>

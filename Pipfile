@@ -7,6 +7,13 @@ name = "pypi"
 flask = "*"
 gunicorn = "*"
 authomatic = "*"
+"auth0-python" = "*"
+authlib = "*"
+python-dotenv = "*"
+requests = "*"
+six = "*"
+sqlalchemy = "*"
+flask-sqlalchemy = "*"
 
 [dev-packages]
 

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+  <div id="cal-body" style="min-height: 80vh!important;">
+
+    <h2>Tributes</h2>
+      {% for t in tributes %}
+        <p>
+          <strong>{{ t.name|e }}</strong> wrote:<br>
+          <small>&#9659; {{ t.text|e }}</small>
+        </p>
+      {% endfor %}
+    <br>
+  </div>
+{% endblock %}

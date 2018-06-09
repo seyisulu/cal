@@ -2,6 +2,18 @@
 
 {% block styles %}
     {% include 'inc/landing.html' %}
+    <style type="text/css">
+    @media screen and (max-width: 480px) {
+        a.button {
+            margin-bottom: 10px!important;
+        }
+        #footer {
+            position: absolute;
+            bottom: 0;
+            left: 20px!important;
+        }
+    }
+    </style>
 {% endblock %}
 
 {% block header %}
@@ -9,6 +21,9 @@
 <p>Sir (Prince) Christopher Abiodun Latunde</p>
 <a href="/pages/arrangements.html" class="button" style="z-index: 8;">
     Burial Arrangements
+</a>
+<a href="/dashboard.html" class="button" style="z-index: 8;">
+    Leave a Tribute
 </a>
 <a href="/pages/gallery.html" class="button" style="z-index: 8;">
     Photo Gallery

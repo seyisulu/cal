@@ -1188,7 +1188,12 @@ Stretchy Nav style - common to:
   position: fixed;
   z-index: 8;
   top: 40px;
-  right: 5%;
+	right: 5%;
+	height: 64px !important;
+	width: 64px;
+}
+.cd-stretchy-nav.nav-is-visible {
+  width: auto !important;
 }
 .cd-stretchy-nav .stretchy-nav-bg {
   /* this is the stretching navigation background */

@@ -95,7 +95,7 @@ def index():
 
 
 @app.route('/auth')
-def callback_handling():
+def auth():
     resp = auth0.authorize_access_token()
 
     url = AUTH0_BASE_URL + '/userinfo'
@@ -110,7 +110,6 @@ def callback_handling():
         'name': userinfo['name'],
         'picture': userinfo['picture']
     }
-    logging.info(userinfo)
 
     return redirect(url_for('dashboard'))
 
@@ -152,8 +151,13 @@ def write_tribute(kind):
         db.session.commit()
         return redirect(url_for('tributes'))
 
-    return render_template('tribute.html',
-                           kind=kind,
+    msgs = {
+        'candle': 'Light a Candle',
+        'flower': 'Lay a Flower',
+        'tribute': 'Leave a Tribute'
+    }
+    msg = msgs.get(kind, 'Leave a Tribute')
+    return render_template('tribute.html', kind=kind, msg=msg,
                            userinfo=session[constants.PROFILE_KEY])
 
 

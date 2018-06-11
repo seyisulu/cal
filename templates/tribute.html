@@ -43,6 +43,9 @@
             height: 50vh !important;
             width: auto !important;
         }
+        .cal-body {
+            width: 100%;
+        }
     }
     </style>
 {% endblock %}
@@ -50,7 +53,7 @@
 {% block content %}
   <div id="cal-body" style="min-height: 80vh!important;">
 
-    <h2>Leave a Tribute</h2>
+    <h2>{{ msg }}</h2>
     <!-- Tribute Form -->
     <form id="signup-form" method="post" action="/tribute/{{ kind }}">
         <textarea name="text" id="names" rows="5" placeholder="Tribute"></textarea>

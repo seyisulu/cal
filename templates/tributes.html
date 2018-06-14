@@ -5,6 +5,17 @@
     #cal-body p {
         text-align: justify;
     }
+    .sep {
+        width: 40%!important;
+        margin: 0 auto!important;
+        display: block;
+    }
+
+    @media screen and (max-width: 480px) {
+        .sep {
+            width: 70%!important;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -15,8 +26,10 @@
       {% for t in tributes %}
         <p>
           <strong>{{ t.name|e }}</strong> wrote:<br>
-          <small>&#9659; {{ t.text|e }}</small>
+          <small>&#9659; {{ t.text|e }}</small><br>
         </p>
+        <img src="{{ url_for('static', filename='img/sep.svg') }}" class="sep">
+
       {% endfor %}
     <br>
   </div>
